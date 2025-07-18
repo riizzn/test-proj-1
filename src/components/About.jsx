@@ -3,18 +3,29 @@ import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import gsap from "gsap";
 const About = () => {
-  useGSAP(()=>{
-    const cSplit = new SplitText(".content", { type: "words chars" });
-     gsap.from(cSplit.words, {
-      opacity: 0,
-      yPercent: 100,
-      duration: 0.05, //each word takes 0.05 s to reach the end state
-      ease: "expo.out",
-      stagger: 0.04,// word #2 starts 0.04 s after word #1 starts
+  useGSAP(() => {
+    const tSplit = new SplitText("#about h2", { type: "words" });
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top center",
+      },
     });
-  })
-
-
+    scrollTimeline
+      .from(tSplit.words, {
+        opacity: 0,
+        duration: 1,
+        yPercent: 100,
+        ease: "expo.out",
+        stagger: 0.02,
+      })
+      .from(".top-grid div, .bottom-grid div", {
+        opacity: 0,
+        duration: 1,
+        ease: "power1.inOut",
+        stagger: 0.04,
+      },'-=0.5');
+  });
 
   return (
     <div id="about">
