@@ -56,6 +56,9 @@ body {
     transparent 100%
   );
 }
+@utility lineargrad {
+  background: linear-gradient(to bottom, #262626, #000000);
+}
 
 @utility masked-img {
   mask-image: url("/images/mask-img.png");
